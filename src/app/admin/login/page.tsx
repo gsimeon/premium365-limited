@@ -2,12 +2,15 @@ import Link from "next/link";
 import { Lock, ShieldAlert, ArrowLeft, Send } from "lucide-react";
 import { requestAdminMagicLink } from "../actions";
 
+import { isSupabaseConfigured } from "@/lib/catalogue";
+
 export const metadata = { title: "Staff Sign In | Premium 365 Limited" };
 
 type SearchParams = Promise<{ error?: string; sent?: string }>;
 
 export default async function AdminLoginPage({ searchParams }: { searchParams: SearchParams }) {
   const params = await searchParams;
+  const configured = isSupabaseConfigured();
 
   return (
     <section className="mx-auto max-w-xl px-5 py-20 md:py-28">
@@ -36,7 +39,21 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: S
           Request a passwordless magic link to access catalogue management, inventory allocation, and order fulfillment. Access is restricted to authorized staff and administrator accounts.
         </p>
 
-        {params.error && (
+        {!configured && (
+          <div className="mt-6 rounded-2xl border border-amber-500/30 bg-amber-950/40 p-5 text-xs text-amber-200 space-y-2">
+            <div className="flex items-center gap-2 font-bold text-amber-300 text-sm">
+              <span>⚠️ Supabase Keys Required in .env.local</span>
+            </div>
+            <p className="leading-relaxed">
+              Magic link dispatch requires your Supabase <code className="rounded bg-black/40 px-1.5 py-0.5 font-mono text-amber-300">anon</code> key to be set in <code className="rounded bg-black/40 px-1.5 py-0.5 font-mono text-amber-300">.env.local</code>.
+            </p>
+            <p className="text-[11px] text-amber-400/90 pt-1">
+              Find keys in Supabase: <strong>Project Settings → API</strong>.
+            </p>
+          </div>
+        )}
+
+        {params.error && configured && (
           <div role="alert" className="mt-6 rounded-2xl border border-red-500/30 bg-red-950/40 p-4 text-xs text-red-200">
             <span className="font-bold">Access error: </span>
             {params.error}
