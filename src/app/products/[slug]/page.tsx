@@ -211,6 +211,79 @@ export default async function ProductDetail({ params }: Props) {
             )}
           </div>
         </div>
+
+        {/* Related Technology Recommendations */}
+        <div className="mt-24 border-t border-slate-900 pt-16">
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-400">
+                Alternative Hardware
+              </span>
+              <h3 className="font-display text-2xl font-bold text-white mt-1">
+                Frequently Paired & Similar Equipment
+              </h3>
+            </div>
+            <Link href="/shop" className="text-xs font-bold text-blue-400 hover:underline">
+              View All 24 Products →
+            </Link>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-3">
+            {[
+              {
+                name: "Dell UltraSharp 32 4K USB-C Hub Monitor",
+                slug: "dell-ultrasharp-32-4k-hub-monitor",
+                price_minor: 72900,
+                category: "Accessories",
+                image: "/images/analytics.jpg",
+                condition: "Brand New",
+              },
+              {
+                name: "CalDigit TS4 Thunderbolt 4 Station (18 Ports, 98W)",
+                slug: "caldigit-ts4-docking-station",
+                price_minor: 36900,
+                category: "Peripherals",
+                image: "/images/laptop-pro.jpg",
+                condition: "Brand New",
+              },
+              {
+                name: "Logitech MX Master 3S Mouse & Mechanical Keys Combo",
+                slug: "logitech-mx-master-3s-combo",
+                price_minor: 18900,
+                category: "Accessories",
+                image: "/images/laptop-pro.jpg",
+                condition: "Brand New",
+              },
+            ].map((rel) => (
+              <Link
+                key={rel.slug}
+                href={`/products/${rel.slug}`}
+                className="group rounded-2xl border border-slate-800 bg-slate-900/60 p-4 transition-all hover:-translate-y-1 hover:border-slate-700 hover:bg-slate-900"
+              >
+                <div className="relative h-40 w-full overflow-hidden rounded-xl bg-slate-950">
+                  <Image
+                    src={rel.image}
+                    alt={rel.name}
+                    fill
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <span className="absolute top-2 left-2 rounded-full bg-slate-950/80 px-2 py-0.5 text-[10px] font-bold text-blue-300">
+                    {rel.condition}
+                  </span>
+                </div>
+                <div className="mt-3">
+                  <span className="text-[10px] font-mono text-slate-500">{rel.category}</span>
+                  <h4 className="font-display text-sm font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-1">
+                    {rel.name}
+                  </h4>
+                  <p className="mt-1 font-extrabold text-blue-400 text-sm">
+                    {formatPrice(rel.price_minor, "GBP")}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
     </div>
   );
