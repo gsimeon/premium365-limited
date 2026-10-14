@@ -104,3 +104,48 @@ export async function requestAdminMagicLink(formData: FormData) {
   if (error) redirect(`/admin/login?error=${encodeURIComponent(error.message)}`);
   redirect("/admin/login?sent=1");
 }
+
+export async function signInWithPasswordAction(formData: FormData) {
+  if (!isSupabaseConfigured()) {
+    redirect("/admin/login?error=Supabase%20is%20not%20configured%20yet.");
+  }
+  const email = z.string().trim().email().safeParse(value(formData, "email"));
+  const password = z.string().min(1).safeParse(value(formData, "password"));
+  if (!email.success || !password.success) {
+    redirect("/admin/login?error=Please%20enter%20both%20an%20email%20address%20and%20password.");
+  }
+
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email.data,
+    password: password.data,
+  });
+
+  if (error || !data.user) {
+    redirect(`/admin/login?error=${encodeURIComponent(error?.message ?? "Invalid email or password.")}`);
+  }
+
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", data.user.id)
+    .maybeSingle();
+
+  if (profileError || !profile || !["staff", "admin"].includes(profile.role)) {
+    await supabase.auth.signOut();
+    redirect("/admin/login?error=Access%20restricted.%20Your%20account%20does%20not%20have%20staff%20or%20admin%20privileges.");
+  }
+
+  revalidatePath("/admin");
+  redirect("/admin");
+}
+
+export async function adminSignOutAction() {
+  if (isSupabaseConfigured()) {
+    const supabase = await createClient();
+    await supabase.auth.signOut();
+  }
+  revalidatePath("/admin");
+  redirect("/admin/login");
+}
+

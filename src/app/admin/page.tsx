@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured, formatPrice } from "@/lib/catalogue";
-import { createProductAction, updateInventoryAction, updateProductAction } from "./actions";
+import { createProductAction, updateInventoryAction, updateProductAction, adminSignOutAction } from "./actions";
 
 export const metadata = { title: "Catalogue Administration | Premium 365 Limited" };
 
@@ -108,6 +108,15 @@ export default async function AdminPage({ searchParams }: { searchParams: Search
           <Link href="/shop" className="text-slate-600 hover:text-slate-900 transition-colors">
             Live Public Shop ↗
           </Link>
+          <span className="text-slate-300">|</span>
+          <form action={adminSignOutAction}>
+            <button
+              type="submit"
+              className="text-red-600 hover:text-red-700 font-bold transition-colors cursor-pointer"
+            >
+              Sign Out
+            </button>
+          </form>
         </div>
       </div>
 
