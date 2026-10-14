@@ -1,0 +1,4 @@
+create table public.audit_logs(id uuid primary key default gen_random_uuid(), actor_id uuid references auth.users(id), action text not null, entity_type text not null, entity_id text, metadata jsonb not null default '{}'::jsonb, created_at timestamptz not null default now());
+create table public.provider_events(id uuid primary key default gen_random_uuid(), provider text not null check(provider in ('stripe','paypal')), provider_event_id text not null, event_type text not null, processed_at timestamptz, processing_error text, received_at timestamptz not null default now(), unique(provider,provider_event_id));
+alter table public.audit_logs enable row level security; alter table public.provider_events enable row level security;
+-- No client policies. Insert/update from trusted server code only. Verify webhook signatures before recording/processing events.

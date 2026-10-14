@@ -1,0 +1,8 @@
+create table public.services(id uuid primary key default gen_random_uuid(), name text not null, slug text not null unique, summary text not null, body text, is_active boolean not null default true, sort_order int not null default 0);
+create table public.service_enquiries(id uuid primary key default gen_random_uuid(), name text not null, email text not null, enquiry_type text not null, message text not null, status text not null default 'new', created_at timestamptz not null default now());
+create table public.courses(id uuid primary key default gen_random_uuid(), name text not null, slug text not null unique, summary text not null, description text, delivery_mode text not null default 'enquiry', is_published boolean not null default false);
+create table public.course_enquiries(id uuid primary key default gen_random_uuid(), course_id uuid references public.courses(id), name text not null, email text not null, organisation text, message text, status text not null default 'new', created_at timestamptz not null default now());
+alter table public.services enable row level security; alter table public.service_enquiries enable row level security; alter table public.courses enable row level security; alter table public.course_enquiries enable row level security;
+create policy "public reads active services" on public.services for select to anon,authenticated using(is_active=true);
+create policy "public reads published courses" on public.courses for select to anon,authenticated using(is_published=true);
+-- No anonymous direct insert policies for enquiry tables; use a validated server action with rate limiting and spam protection.
