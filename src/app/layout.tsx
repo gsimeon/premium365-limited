@@ -57,7 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-GB" className={`${displayFont.variable} ${bodyFont.variable}`}>
-      <body className="min-h-screen bg-slate-950 font-sans text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
+      <body className="min-h-screen bg-slate-50 font-sans text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
         <CartProvider>
           <SiteHeader />
           <main className="min-h-[calc(100vh-140px)]">{children}</main>

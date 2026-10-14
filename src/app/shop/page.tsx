@@ -90,25 +90,25 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
   });
 
   return (
-    <div className="min-h-screen bg-slate-950 pb-24">
+    <div className="min-h-screen bg-slate-50 pb-24">
       {/* Header Banner */}
-      <section className="relative overflow-hidden border-b border-slate-900 bg-slate-900/60 py-16 sm:py-20">
-        <div className="pointer-events-none absolute -top-40 -right-40 h-[400px] w-[400px] rounded-full bg-blue-600/15 blur-[120px]" />
+      <section className="relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-b from-blue-50/70 via-white to-slate-50 py-14 sm:py-18">
+        <div className="pointer-events-none absolute -top-40 -right-40 h-[400px] w-[400px] rounded-full bg-blue-500/10 blur-[120px]" />
         <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <span className="text-xs font-black uppercase tracking-[0.2em] text-blue-400">
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-blue-600">
                 UK Hardware Procurement · Birmingham HQ
               </span>
-              <h1 className="mt-2 font-display text-4xl sm:text-5xl font-black text-white">
+              <h1 className="mt-2 font-display text-4xl sm:text-5xl font-black text-slate-900">
                 Technology, selected with purpose.
               </h1>
-              <p className="mt-3 max-w-2xl text-base text-slate-300">
+              <p className="mt-3 max-w-2xl text-base text-slate-600">
                 Explore our curated enterprise catalogue of genuine commercial laptops, ISV workstations, 10G networking gear, and precision displays.
               </p>
             </div>
-            <div className="rounded-2xl border border-slate-800 bg-slate-950/80 px-4 py-3 text-xs text-slate-300 backdrop-blur-md">
-              <span className="font-bold text-white">🇬🇧 24 Genuine UK Products</span> · Prices in GBP (inc. warranty & VAT)
+            <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-xs text-slate-700 shadow-xs">
+              <span className="font-bold text-slate-900">🇬🇧 24 Genuine UK Products</span> · Prices in GBP (inc. warranty & VAT)
             </div>
           </div>
         </div>
@@ -117,7 +117,7 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
       {/* Main Container */}
       <section className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 pt-10">
         {/* Filter and Search Navigation */}
-        <div className="space-y-5 border-b border-slate-900 pb-8">
+        <div className="space-y-5 border-b border-slate-200 pb-8">
           {/* Category Tabs */}
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex flex-wrap items-center gap-2">
@@ -136,8 +136,8 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
                     href={href}
                     className={`rounded-full px-4 py-2 text-xs font-bold transition-all ${
                       isActive
-                        ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-                        : "border border-slate-800 bg-slate-900/80 text-slate-300 hover:border-slate-700 hover:text-white"
+                        ? "bg-blue-600 text-white shadow-md shadow-blue-600/25"
+                        : "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 shadow-xs"
                     }`}
                   >
                     {cat.label}
@@ -170,8 +170,8 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
                     href={href}
                     className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition-colors ${
                       isActive
-                        ? "bg-slate-800 text-blue-400 border border-blue-500/30"
-                        : "text-slate-400 hover:text-slate-200"
+                        ? "bg-blue-50 text-blue-700 border border-blue-200"
+                        : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
                     {c.label}
@@ -185,7 +185,7 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
           <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
             {/* Brand Pills */}
             <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 mr-1">Brand:</span>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mr-1">Brand:</span>
               {brands.map((b) => {
                 const isActive = brand.toLowerCase() === b.toLowerCase();
                 const queryParams = new URLSearchParams();
@@ -201,8 +201,8 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
                     href={href}
                     className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
                       isActive
-                        ? "bg-blue-500/20 text-blue-300 border border-blue-500/40"
-                        : "bg-slate-900/60 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800/60"
+                        ? "bg-blue-600 text-white shadow-xs"
+                        : "bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 shadow-xs"
                     }`}
                   >
                     {b}
@@ -213,7 +213,7 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
 
             {/* Price Ranges */}
             <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 mr-1">Budget:</span>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mr-1">Budget:</span>
               {priceRanges.map((pr) => {
                 const isActive = price === pr.slug;
                 const queryParams = new URLSearchParams();
@@ -227,10 +227,10 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
                   <Link
                     key={pr.slug}
                     href={href}
-                    className={`rounded-md px-2 py-0.5 text-[11px] font-medium transition-all ${
+                    className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
                       isActive
-                        ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
-                        : "text-slate-400 hover:text-white"
+                        ? "bg-emerald-600 text-white shadow-xs"
+                        : "bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 shadow-xs"
                     }`}
                   >
                     {pr.label}
@@ -241,12 +241,12 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
           </div>
 
           {/* Result Counter & Active Filter Reset */}
-          <div className="flex items-center justify-between text-xs text-slate-400 pt-1">
+          <div className="flex items-center justify-between text-xs text-slate-500 pt-1">
             <span>
-              Showing <strong className="text-white">{filteredProducts.length}</strong> genuine UK enterprise products
+              Showing <strong className="text-slate-900">{filteredProducts.length}</strong> genuine UK enterprise products
             </span>
             {(category !== "all" || condition !== "all" || brand !== "All" || price !== "all") && (
-              <Link href="/shop" className="text-blue-400 hover:underline">
+              <Link href="/shop" className="text-blue-600 font-bold hover:underline">
                 Clear all filters ×
               </Link>
             )}
@@ -255,14 +255,14 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
 
         {/* Product Grid */}
         {filteredProducts.length === 0 ? (
-          <div className="my-16 rounded-3xl border border-dashed border-slate-800 bg-slate-900/40 p-12 text-center">
-            <h3 className="font-display text-2xl font-bold text-white">No products found</h3>
-            <p className="mt-2 text-sm text-slate-400">
+          <div className="my-16 rounded-3xl border border-dashed border-slate-300 bg-white p-12 text-center shadow-xs">
+            <h3 className="font-display text-2xl font-bold text-slate-900">No products found</h3>
+            <p className="mt-2 text-sm text-slate-500">
               No products match your current filter combination.
             </p>
             <Link
               href="/shop"
-              className="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-2.5 text-xs font-bold text-white hover:bg-blue-500"
+              className="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-2.5 text-xs font-bold text-white hover:bg-blue-700 shadow-md shadow-blue-600/20"
             >
               Reset Filters
             </Link>
@@ -272,29 +272,29 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
             {filteredProducts.map((product) => (
               <article
                 key={product.id}
-                className="group flex flex-col overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/60 shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-slate-700 hover:shadow-2xl hover:shadow-blue-900/10"
+                className="group flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-400 hover:shadow-xl"
               >
                 {/* Product Image Box */}
-                <div className="relative h-64 w-full overflow-hidden bg-slate-950">
+                <div className="relative h-64 w-full overflow-hidden bg-slate-100">
                   <Image
                     src={product.imageUrl || "/images/laptop-pro.jpg"}
                     alt={product.name}
                     fill
                     className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent" />
                   <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                    <span className="rounded-full bg-slate-950/85 backdrop-blur-md border border-slate-700 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-blue-300">
+                    <span className="rounded-full bg-white/95 backdrop-blur-md border border-slate-200 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-700 shadow-xs">
                       {product.condition}
                     </span>
                     {product.badge && (
-                      <span className="rounded-full bg-blue-600/90 px-3 py-1 text-[11px] font-bold text-white shadow-sm">
+                      <span className="rounded-full bg-blue-600 px-3 py-1 text-[11px] font-bold text-white shadow-xs">
                         {product.badge}
                       </span>
                     )}
                   </div>
                   <div className="absolute bottom-3 right-4">
-                    <span className="rounded-full bg-slate-950/80 px-2.5 py-0.5 text-[10px] font-medium text-emerald-400 border border-emerald-500/20">
+                    <span className="rounded-full bg-white/95 px-2.5 py-0.5 text-[10px] font-bold text-emerald-700 border border-emerald-200 shadow-xs">
                       In Stock · UK Dispatch
                     </span>
                   </div>
@@ -302,36 +302,36 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
 
                 {/* Details Content */}
                 <div className="flex flex-1 flex-col p-6">
-                  <div className="flex items-center justify-between text-xs text-slate-400 font-medium">
-                    <span className="text-blue-400 font-semibold">{product.brand ?? "Enterprise"}</span>
-                    {product.sku && <span className="font-mono text-[11px] text-slate-500">{product.sku}</span>}
+                  <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
+                    <span className="text-blue-600 font-bold">{product.brand ?? "Enterprise"}</span>
+                    {product.sku && <span className="font-mono text-[11px] text-slate-400">{product.sku}</span>}
                   </div>
 
-                  <h2 className="mt-2 font-display text-lg font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2">
+                  <h2 className="mt-2 font-display text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2">
                     {product.name}
                   </h2>
 
-                  <p className="mt-2 flex-1 text-xs leading-relaxed text-slate-400 line-clamp-3">
+                  <p className="mt-2 flex-1 text-xs leading-relaxed text-slate-600 line-clamp-3">
                     {product.summary}
                   </p>
 
                   {/* Specs Quick Peek */}
                   {product.specs && (
-                    <div className="mt-4 border-t border-slate-800/80 pt-3 space-y-1 text-[11px] text-slate-400">
+                    <div className="mt-4 border-t border-slate-100 pt-3 space-y-1 text-[11px] text-slate-600">
                       {Object.entries(product.specs).slice(0, 2).map(([key, val]) => (
                         <div key={key} className="flex justify-between">
-                          <span className="text-slate-500">{key}:</span>
-                          <span className="font-medium text-slate-300 truncate max-w-[170px]">{val}</span>
+                          <span className="text-slate-400">{key}:</span>
+                          <span className="font-semibold text-slate-800 truncate max-w-[170px]">{val}</span>
                         </div>
                       ))}
                     </div>
                   )}
 
                   {/* Pricing and Action */}
-                  <div className="mt-6 flex items-center justify-between border-t border-slate-800/80 pt-4">
+                  <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Price GBP</span>
-                      <p className="text-2xl font-black text-white">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Price GBP</span>
+                      <p className="text-2xl font-black text-slate-900">
                         {formatPrice(product.price_minor, product.currency)}
                       </p>
                     </div>
@@ -348,7 +348,7 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
                       />
                       <Link
                         href={`/products/${product.slug}`}
-                        className="rounded-full border border-slate-700 bg-slate-800/80 px-3.5 py-2 text-xs font-bold text-slate-200 transition-colors hover:border-blue-500 hover:text-white"
+                        className="rounded-full border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700"
                       >
                         Specs ↗
                       </Link>
@@ -361,31 +361,31 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
         )}
 
         {/* Why Buy From Premium 365 Banner */}
-        <div className="mt-20 rounded-3xl border border-slate-800 bg-slate-900/50 p-8 sm:p-12">
+        <div className="mt-20 rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-xs">
           <div className="text-center max-w-2xl mx-auto">
-            <h3 className="font-display text-2xl font-bold text-white">Enterprise Standards for Every Order</h3>
-            <p className="mt-2 text-sm text-slate-400">
+            <h3 className="font-display text-2xl font-bold text-slate-900">Enterprise Standards for Every Order</h3>
+            <p className="mt-2 text-sm text-slate-600">
               Direct procurement backing from our Birmingham engineering team.
             </p>
           </div>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-3 text-center">
-            <div className="rounded-2xl border border-slate-800/80 bg-slate-950/60 p-6">
-              <Truck className="h-6 w-6 text-blue-400 mx-auto" />
-              <h4 className="mt-3 font-bold text-white text-sm">Insured Next-Day Dispatch</h4>
-              <p className="mt-1 text-xs text-slate-400">Royal Mail 24 Tracked and DPD Express across the UK mainland.</p>
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+              <Truck className="h-6 w-6 text-blue-600 mx-auto" />
+              <h4 className="mt-3 font-bold text-slate-900 text-sm">Insured Next-Day Dispatch</h4>
+              <p className="mt-1 text-xs text-slate-600">Royal Mail 24 Tracked and DPD Express across the UK mainland.</p>
             </div>
 
-            <div className="rounded-2xl border border-slate-800/80 bg-slate-950/60 p-6">
-              <ShieldCheck className="h-6 w-6 text-cyan-400 mx-auto" />
-              <h4 className="mt-3 font-bold text-white text-sm">12-Month Hardware Guarantee</h4>
-              <p className="mt-1 text-xs text-slate-400">All new and certified refurbished machines include full warranty.</p>
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+              <ShieldCheck className="h-6 w-6 text-cyan-600 mx-auto" />
+              <h4 className="mt-3 font-bold text-slate-900 text-sm">12-Month Hardware Guarantee</h4>
+              <p className="mt-1 text-xs text-slate-600">All new and certified refurbished machines include full warranty.</p>
             </div>
 
-            <div className="rounded-2xl border border-slate-800/80 bg-slate-950/60 p-6">
-              <RotateCcw className="h-6 w-6 text-emerald-400 mx-auto" />
-              <h4 className="mt-3 font-bold text-white text-sm">14-Day Statutory Returns</h4>
-              <p className="mt-1 text-xs text-slate-400">Full statutory consumer protection and business return rights.</p>
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+              <RotateCcw className="h-6 w-6 text-emerald-600 mx-auto" />
+              <h4 className="mt-3 font-bold text-slate-900 text-sm">14-Day Statutory Returns</h4>
+              <p className="mt-1 text-xs text-slate-600">Full statutory consumer protection and business return rights.</p>
             </div>
           </div>
         </div>

@@ -81,19 +81,19 @@ const courses = [
 
 export default function AcademyPage() {
   return (
-    <div className="min-h-screen bg-slate-950 pb-24">
+    <div className="min-h-screen bg-slate-50 pb-24">
       {/* Header Banner */}
-      <section className="relative overflow-hidden border-b border-slate-900 bg-slate-900/60 py-16 sm:py-24">
-        <div className="pointer-events-none absolute -top-40 -right-40 h-[450px] w-[450px] rounded-full bg-blue-600/15 blur-[130px]" />
+      <section className="relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-b from-blue-50/70 via-white to-slate-50 py-16 sm:py-20">
+        <div className="pointer-events-none absolute -top-40 -right-40 h-[450px] w-[450px] rounded-full bg-blue-500/10 blur-[130px]" />
         <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-4">
-            <span className="text-xs font-black uppercase tracking-[0.2em] text-blue-400">
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-blue-600">
               Premium 365 Academy · UK
             </span>
-            <h1 className="font-display text-4xl sm:text-6xl font-black text-white leading-tight">
+            <h1 className="font-display text-4xl sm:text-6xl font-black text-slate-900 leading-tight">
               Build high-demand tech capability with practical direction.
             </h1>
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
               We deliver practitioner-led training programmes designed to equip professionals and enterprise teams with hands-on skills in cybersecurity, business intelligence, cloud architecture, and automation.
             </p>
           </div>
@@ -109,78 +109,78 @@ export default function AcademyPage() {
               <article
                 key={course.id}
                 id={course.id}
-                className="group rounded-3xl border border-slate-800 bg-slate-900/60 p-8 sm:p-10 shadow-xl transition-all hover:border-slate-700 hover:shadow-2xl"
+                className="group rounded-3xl border border-slate-200 bg-white p-8 sm:p-10 shadow-xs transition-all hover:border-blue-400 hover:shadow-xl"
               >
                 <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
                   {/* Left Column: Course Overview */}
                   <div className="space-y-4 lg:col-span-7">
                     <div className="flex flex-wrap items-center gap-3">
-                      <span className="font-mono text-sm font-black text-blue-400">{course.num}</span>
-                      <span className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-bold text-blue-400 border border-blue-500/20">
+                      <span className="font-mono text-sm font-black text-blue-600">{course.num}</span>
+                      <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 border border-blue-200">
                         {course.level}
                       </span>
-                      <span className="flex items-center gap-1.5 text-xs text-slate-400">
-                        <Clock className="h-3.5 w-3.5 text-slate-500" />
+                      <span className="flex items-center gap-1.5 text-xs text-slate-500">
+                        <Clock className="h-3.5 w-3.5 text-slate-400" />
                         <span>{course.duration}</span>
                       </span>
                     </div>
 
-                    <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white">
+                    <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">
                       {course.title}
                     </h2>
 
-                    <p className="text-sm text-slate-300 leading-relaxed">
+                    <p className="text-sm text-slate-600 leading-relaxed">
                       {course.summary}
                     </p>
 
                     <div className="pt-2 space-y-2">
                       <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Core Syllabus Modules</p>
-                      <ul className="grid gap-2 sm:grid-cols-2 text-xs text-slate-300">
+                      <ul className="grid gap-2 sm:grid-cols-2 text-xs text-slate-700">
                         {course.syllabus.map((item) => (
                           <li key={item} className="flex items-start gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                            <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
                             <span>{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="pt-3 border-t border-slate-800/80 text-xs">
-                      <strong className="text-slate-300">Career Outcome: </strong>
-                      <span className="text-slate-400">{course.outcomes}</span>
+                    <div className="pt-3 border-t border-slate-100 text-xs">
+                      <strong className="text-slate-900">Career Outcome: </strong>
+                      <span className="text-slate-600">{course.outcomes}</span>
                     </div>
                   </div>
 
                   {/* Right Column: Training Details & Enquiry Action */}
-                  <div className="lg:col-span-5 flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/80 p-6 space-y-6">
+                  <div className="lg:col-span-5 flex flex-col justify-between rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-6 shadow-xs">
                     <div className="flex items-center gap-4">
-                      <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                      <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-200">
                         <Icon className="h-6 w-6" />
                       </div>
                       <div>
                         <p className="text-xs font-bold uppercase text-slate-400">Delivery Format</p>
-                        <p className="text-sm font-bold text-white">Live Virtual & Birmingham On-Premises</p>
+                        <p className="text-sm font-bold text-slate-900">Live Virtual & Birmingham On-Premises</p>
                       </div>
                     </div>
 
-                    <div className="space-y-2 text-xs text-slate-400">
-                      <div className="flex justify-between py-1 border-b border-slate-900">
+                    <div className="space-y-2 text-xs text-slate-600">
+                      <div className="flex justify-between py-1 border-b border-slate-200">
                         <span>Cohort Capacity:</span>
-                        <span className="text-slate-200 font-medium">Max 12 Learners / Cohort</span>
+                        <span className="text-slate-900 font-semibold">Max 12 Learners / Cohort</span>
                       </div>
-                      <div className="flex justify-between py-1 border-b border-slate-900">
+                      <div className="flex justify-between py-1 border-b border-slate-200">
                         <span>Lab Environment:</span>
-                        <span className="text-slate-200 font-medium">Cloud Sandboxes Included</span>
+                        <span className="text-slate-900 font-semibold">Cloud Sandboxes Included</span>
                       </div>
-                      <div className="flex justify-between py-1 border-b border-slate-900">
+                      <div className="flex justify-between py-1 border-b border-slate-200">
                         <span>Certification:</span>
-                        <span className="text-slate-200 font-medium">Verified Certificate of Completion</span>
+                        <span className="text-slate-900 font-semibold">Verified Certificate of Completion</span>
                       </div>
                     </div>
 
                     <Link
                       href={`/contact?course=${encodeURIComponent(course.title)}`}
-                      className="w-full text-center rounded-full bg-blue-600 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-blue-600/30 hover:bg-blue-500 transition-all"
+                      className="w-full text-center rounded-full bg-blue-600 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-blue-600/25 hover:bg-blue-700 transition-all"
                     >
                       Enquire for Upcoming Cohort ↗
                     </Link>
@@ -192,27 +192,27 @@ export default function AcademyPage() {
         </div>
 
         {/* Corporate Capability Section */}
-        <div className="mt-20 rounded-3xl border border-slate-800 bg-slate-900/50 p-8 sm:p-12">
+        <div className="mt-20 rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-xs">
           <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
             <div className="space-y-4">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-400">Corporate Upskilling</span>
-              <h3 className="font-display text-2xl sm:text-3xl font-bold text-white">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">Corporate Upskilling</span>
+              <h3 className="font-display text-2xl sm:text-3xl font-bold text-slate-900">
                 Upskill your entire technical team with bespoke curriculum.
               </h3>
-              <p className="text-sm text-slate-300 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed">
                 We design tailored multi-week training cohorts for UK businesses, public sector suppliers, and enterprises seeking to bridge internal skill gaps in cloud security and data literacy.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 text-xs">
-              <div className="rounded-xl border border-slate-800 bg-slate-950 p-4">
-                <Users className="h-5 w-5 text-blue-400" />
-                <p className="mt-2 font-bold text-white">Team Cohort Training</p>
-                <p className="mt-1 text-slate-400">Private training scheduled around your operational sprints.</p>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <Users className="h-5 w-5 text-blue-600" />
+                <p className="mt-2 font-bold text-slate-900">Team Cohort Training</p>
+                <p className="mt-1 text-slate-600">Private training scheduled around your operational sprints.</p>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-slate-950 p-4">
-                <BookOpen className="h-5 w-5 text-cyan-400" />
-                <p className="mt-2 font-bold text-white">Bespoke Lab Exercises</p>
-                <p className="mt-1 text-slate-400">Practise on datasets and cloud configurations relevant to your stack.</p>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <BookOpen className="h-5 w-5 text-cyan-600" />
+                <p className="mt-2 font-bold text-slate-900">Bespoke Lab Exercises</p>
+                <p className="mt-1 text-slate-600">Practise on datasets and cloud configurations relevant to your stack.</p>
               </div>
             </div>
           </div>
@@ -221,15 +221,15 @@ export default function AcademyPage() {
         {/* Training Enquiry Form */}
         <div className="mt-20 grid gap-12 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-5 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-blue-400">Enrolment & Enquiries</span>
-            <h2 className="font-display text-3xl font-extrabold text-white">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">Enrolment & Enquiries</span>
+            <h2 className="font-display text-3xl font-extrabold text-slate-900">
               Enquire about course dates and registration.
             </h2>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-sm text-slate-600 leading-relaxed">
               Course places are confirmed following an exploratory review to match your current proficiency with the most suitable syllabus.
             </p>
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 space-y-2 text-xs text-slate-400">
-              <p className="font-bold text-white">Academy Admissions:</p>
+            <div className="rounded-2xl border border-slate-200 bg-white p-5 space-y-2 text-xs text-slate-600 shadow-xs">
+              <p className="font-bold text-slate-900">Academy Admissions:</p>
               <p>Email: academy@premium365.uk</p>
               <p>Location: 36 Hallewell Road, Birmingham, B16 0LR, UK</p>
             </div>

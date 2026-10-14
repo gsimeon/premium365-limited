@@ -93,19 +93,19 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-slate-950 pb-24">
+    <div className="min-h-screen bg-slate-50 pb-24">
       {/* Header Banner */}
-      <section className="relative overflow-hidden border-b border-slate-900 bg-slate-900/60 py-16 sm:py-24">
-        <div className="pointer-events-none absolute -top-40 -left-40 h-[450px] w-[450px] rounded-full bg-blue-600/15 blur-[130px]" />
+      <section className="relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-b from-blue-50/70 via-white to-slate-50 py-16 sm:py-20">
+        <div className="pointer-events-none absolute -top-40 -left-40 h-[450px] w-[450px] rounded-full bg-blue-500/10 blur-[130px]" />
         <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-4">
-            <span className="text-xs font-black uppercase tracking-[0.2em] text-blue-400">
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-blue-600">
               Technical Advisory & Delivery
             </span>
-            <h1 className="font-display text-4xl sm:text-6xl font-black text-white leading-tight">
+            <h1 className="font-display text-4xl sm:text-6xl font-black text-slate-900 leading-tight">
               Expertise to solve real business bottlenecks.
             </h1>
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
               We provide practical, pragmatic technology delivery—from custom web development and cybersecurity hardening to business intelligence dashboards and cloud migrations.
             </p>
           </div>
@@ -123,23 +123,23 @@ export default function ServicesPage() {
               <article
                 key={service.id}
                 id={service.id}
-                className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8 sm:p-12 shadow-xl transition-all hover:border-slate-700"
+                className="rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-xs transition-all hover:border-blue-400 hover:shadow-xl"
               >
                 <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
                   {/* Service Information */}
                   <div className={`space-y-6 lg:col-span-7 ${isReversed ? "lg:order-2" : ""}`}>
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-sm font-black text-blue-400">{service.num}</span>
-                      <span className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-bold text-blue-400 border border-blue-500/20">
+                      <span className="font-mono text-sm font-black text-blue-600">{service.num}</span>
+                      <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 border border-blue-200">
                         {service.badge}
                       </span>
                     </div>
 
-                    <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white">
+                    <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">
                       {service.title}
                     </h2>
 
-                    <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                       {service.summary}
                     </p>
 
@@ -147,8 +147,8 @@ export default function ServicesPage() {
                       <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Key Capabilities</p>
                       <div className="grid gap-2 sm:grid-cols-2">
                         {service.capabilities.map((cap) => (
-                          <div key={cap} className="flex items-start gap-2 text-xs text-slate-300">
-                            <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                          <div key={cap} className="flex items-start gap-2 text-xs text-slate-700">
+                            <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
                             <span>{cap}</span>
                           </div>
                         ))}
@@ -161,7 +161,7 @@ export default function ServicesPage() {
                         {service.techStack.map((tech) => (
                           <span
                             key={tech}
-                            className="rounded-lg bg-slate-950 px-2.5 py-1 text-[11px] font-medium text-slate-300 border border-slate-800"
+                            className="rounded-lg bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700 border border-slate-200"
                           >
                             {tech}
                           </span>
@@ -172,7 +172,7 @@ export default function ServicesPage() {
                     <div className="pt-4">
                       <Link
                         href={`/contact?service=${encodeURIComponent(service.title)}`}
-                        className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-blue-600/30 hover:bg-blue-500 transition-all"
+                        className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-blue-600/25 hover:bg-blue-700 transition-all"
                       >
                         <span>Enquire About {service.badge}</span>
                         <ArrowRight className="h-4 w-4" />
@@ -182,22 +182,22 @@ export default function ServicesPage() {
 
                   {/* Visual Box / Decorative Card */}
                   <div className={`lg:col-span-5 ${isReversed ? "lg:order-1" : ""}`}>
-                    <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/80 p-8 text-center space-y-4">
-                      <div className="grid h-20 w-20 mx-auto place-items-center rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 text-slate-950 shadow-lg shadow-blue-500/20">
+                    <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-8 text-center space-y-4 shadow-xs">
+                      <div className="grid h-20 w-20 mx-auto place-items-center rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white shadow-md shadow-blue-500/25">
                         <Icon className="h-10 w-10 text-white" />
                       </div>
-                      <h3 className="font-display text-lg font-bold text-white">{service.title}</h3>
-                      <p className="text-xs text-slate-400 leading-relaxed">
+                      <h3 className="font-display text-lg font-bold text-slate-900">{service.title}</h3>
+                      <p className="text-xs text-slate-600 leading-relaxed">
                         Delivered by certified UK engineers adhering to rigorous industry benchmarks and transparent project milestones.
                       </p>
-                      <div className="pt-4 border-t border-slate-900 grid grid-cols-2 gap-3 text-left">
-                        <div className="rounded-xl bg-slate-900/60 p-3">
-                          <p className="text-[10px] text-slate-500 font-bold">TIMELINE</p>
-                          <p className="text-xs font-bold text-slate-200">2-6 Weeks Typical</p>
+                      <div className="pt-4 border-t border-slate-200 grid grid-cols-2 gap-3 text-left">
+                        <div className="rounded-xl bg-white border border-slate-200 p-3 shadow-2xs">
+                          <p className="text-[10px] text-slate-400 font-bold">TIMELINE</p>
+                          <p className="text-xs font-bold text-slate-800">2-6 Weeks Typical</p>
                         </div>
-                        <div className="rounded-xl bg-slate-900/60 p-3">
-                          <p className="text-[10px] text-slate-500 font-bold">FORMAT</p>
-                          <p className="text-xs font-bold text-slate-200">Fixed or Retainer</p>
+                        <div className="rounded-xl bg-white border border-slate-200 p-3 shadow-2xs">
+                          <p className="text-[10px] text-slate-400 font-bold">FORMAT</p>
+                          <p className="text-xs font-bold text-slate-800">Fixed or Retainer</p>
                         </div>
                       </div>
                     </div>
@@ -209,11 +209,11 @@ export default function ServicesPage() {
         </div>
 
         {/* Project Delivery Methodology */}
-        <div className="mt-24 rounded-3xl border border-slate-800 bg-slate-900/50 p-8 sm:p-14">
+        <div className="mt-24 rounded-3xl border border-slate-200 bg-white p-8 sm:p-14 shadow-xs">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-blue-400">Our Methodology</span>
-            <h2 className="font-display text-3xl font-bold text-white">How We Deliver Results</h2>
-            <p className="text-sm text-slate-400">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">Our Methodology</span>
+            <h2 className="font-display text-3xl font-bold text-slate-900">How We Deliver Results</h2>
+            <p className="text-sm text-slate-600">
               A transparent, milestone-driven framework designed to eliminate surprises and maximize ROI.
             </p>
           </div>
@@ -225,10 +225,10 @@ export default function ServicesPage() {
               { step: "03", title: "Agile Execution", desc: "Iterative sprints with transparent client demos and progress reviews." },
               { step: "04", title: "Handover & Support", desc: "Comprehensive documentation, team training, and proactive maintenance." },
             ].map((st) => (
-              <div key={st.step} className="rounded-2xl border border-slate-800/80 bg-slate-950/60 p-6 space-y-2">
-                <span className="font-mono text-sm font-black text-blue-400">{st.step}</span>
-                <h3 className="font-bold text-white text-base">{st.title}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">{st.desc}</p>
+              <div key={st.step} className="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-2">
+                <span className="font-mono text-sm font-black text-blue-600">{st.step}</span>
+                <h3 className="font-bold text-slate-900 text-base">{st.title}</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">{st.desc}</p>
               </div>
             ))}
           </div>
@@ -237,15 +237,15 @@ export default function ServicesPage() {
         {/* Direct Project Enquiry Form */}
         <div className="mt-20 grid gap-12 lg:grid-cols-12 lg:items-start" id="enquiry">
           <div className="lg:col-span-5 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-400">Let’s Connect</span>
-            <h2 className="font-display text-3xl font-extrabold text-white">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">Let’s Connect</span>
+            <h2 className="font-display text-3xl font-extrabold text-slate-900">
               Discuss your technical challenge.
             </h2>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-sm text-slate-600 leading-relaxed">
               Fill in the form to describe your scope or book an exploratory consultation with our senior engineering team in Birmingham.
             </p>
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 space-y-2 text-xs text-slate-400">
-              <p className="font-bold text-white">Direct Advisory Contact:</p>
+            <div className="rounded-2xl border border-slate-200 bg-white p-5 space-y-2 text-xs text-slate-600 shadow-xs">
+              <p className="font-bold text-slate-900">Direct Advisory Contact:</p>
               <p>Email: consulting@premium365.uk</p>
               <p>Registered Office: 36 Hallewell Road, Birmingham, B16 0LR, UK</p>
             </div>
