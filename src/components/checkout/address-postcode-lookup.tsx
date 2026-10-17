@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useId, useMemo, useEffect } from "react";
+import { useState, useId, useMemo, useEffect, useCallback } from "react";
 import { Search, MapPin, Building2, Home, Check, X, Loader2, ArrowRight } from "lucide-react";
 
 export interface SelectedAddress {
@@ -33,6 +33,8 @@ interface AddressPostcodeLookupProps {
   onManualEntryClick?: () => void;
 }
 
+const UK_POSTCODE_REGEX = /^[A-Z]{1,2}[0-9][A-Z0-9]?\s*[0-9][A-Z]{2}$/i;
+
 export function AddressPostcodeLookup({
   postcode,
   onPostcodeChange,
@@ -48,7 +50,7 @@ export function AddressPostcodeLookup({
 
   const searchInputId = useId();
 
-  async function performLookup(targetPostcode?: string) {
+  const performLookup = useCallback(async (targetPostcode?: string) => {
     const pc = (targetPostcode ?? postcode).trim();
     if (!pc) {
       setError("Please enter a UK postcode first (e.g. B16 0LR or SW1A 2AA).");
@@ -78,9 +80,7 @@ export function AddressPostcodeLookup({
     } finally {
       setIsLoading(false);
     }
-  }
-
-  const UK_POSTCODE_REGEX = /^[A-Z]{1,2}[0-9][A-Z0-9]?\s*[0-9][A-Z]{2}$/i;
+  }, [postcode, onPostcodeChange]);
 
   // Auto-trigger lookup as soon as a valid UK postcode is entered
   useEffect(() => {
@@ -94,7 +94,7 @@ export function AddressPostcodeLookup({
       }, 450);
       return () => clearTimeout(timer);
     }
-  }, [postcode, lookupData]);
+  }, [postcode, lookupData, performLookup]);
 
   // Close popup with Escape key
   useEffect(() => {

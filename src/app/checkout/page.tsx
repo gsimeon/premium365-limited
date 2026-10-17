@@ -6,6 +6,7 @@ import { ShieldCheck, Lock, CreditCard, ArrowRight, Loader2, Truck, Sparkles } f
 import { useCart } from "@/components/cart/cart-provider";
 import { formatPrice } from "@/lib/format";
 import { AddressPostcodeLookup } from "@/components/checkout/address-postcode-lookup";
+import { MonzoPayButton } from "@/components/monzo/monzo-pay-button";
 
 export default function CheckoutPage() {
   const { items, add } = useCart();
@@ -417,6 +418,29 @@ export default function CheckoutPage() {
               <span>Total Payable</span>
               <span className="text-xl font-black text-blue-600">{formatPrice(total)}</span>
             </div>
+          </div>
+
+          {/* Monzo Alternative Quick Pay */}
+          <div className="rounded-2xl bg-gradient-to-br from-rose-50/70 to-orange-50/50 border border-rose-200/80 p-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-rose-950 flex items-center gap-1.5">
+                <span className="grid h-4 w-4 place-items-center rounded bg-[#FF365D] text-white text-[9px] font-black">M</span>
+                Monzo Direct Payment
+              </span>
+              <span className="text-[10px] font-bold text-rose-700 bg-white px-2 py-0.5 rounded-full border border-rose-200">Instant</span>
+            </div>
+            <p className="text-xs text-rose-800 leading-relaxed">
+              Prefer to pay directly via Monzo, Apple Pay, or UK debit card? Generate a live Monzo payment link for this exact order total:
+            </p>
+            <MonzoPayButton
+              product={{
+                name: `Premium 365 Order (${items.length} item${items.length > 1 ? "s" : ""})`,
+                price_minor: total,
+                currency: "GBP",
+              }}
+              variant="primary"
+              className="w-full text-xs"
+            />
           </div>
 
           <div className="border-t border-slate-100 pt-4 space-y-2 text-[11px] text-slate-500">

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured, formatPrice } from "@/lib/catalogue";
 import { createProductAction, updateInventoryAction, updateProductAction, adminSignOutAction } from "./actions";
+import { MonzoPayButton } from "@/components/monzo/monzo-pay-button";
 
 export const metadata = { title: "Catalogue Administration | Premium 365 Limited" };
 
@@ -266,17 +267,29 @@ export default async function AdminPage({ searchParams }: { searchParams: Search
                         </p>
                       </div>
 
-                      <span
-                        className={`rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
-                          product.status === "active"
-                            ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                            : product.status === "draft"
-                            ? "bg-amber-50 text-amber-700 border border-amber-200"
-                            : "bg-slate-100 text-slate-600"
-                        }`}
-                      >
-                        {product.status}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <MonzoPayButton
+                          product={{
+                            id: product.id,
+                            name: product.name,
+                            price_minor: product.price_minor,
+                            sku: product.sku,
+                            currency: product.currency,
+                          }}
+                          variant="admin"
+                        />
+                        <span
+                          className={`rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
+                            product.status === "active"
+                              ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                              : product.status === "draft"
+                              ? "bg-amber-50 text-amber-700 border border-amber-200"
+                              : "bg-slate-100 text-slate-600"
+                          }`}
+                        >
+                          {product.status}
+                        </span>
+                      </div>
                     </div>
 
                     <div className="flex items-center justify-between text-xs pt-1">

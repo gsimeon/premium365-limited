@@ -4,6 +4,7 @@ import { ShieldCheck, Truck, RotateCcw, SlidersHorizontal } from "lucide-react";
 import { getActiveProducts } from "@/lib/catalogue";
 import { formatPrice } from "@/lib/format";
 import { AddToCartButton } from "@/components/cart/add-to-cart-button";
+import { MonzoPayButton } from "@/components/monzo/monzo-pay-button";
 
 export const metadata = {
   title: "Shop Enterprise Technology | Premium 365 Limited",
@@ -328,7 +329,7 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
                   )}
 
                   {/* Pricing and Action */}
-                  <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
+                  <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-4">
                     <div>
                       <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Price GBP</span>
                       <p className="text-2xl font-black text-slate-900">
@@ -336,7 +337,17 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5">
+                      <MonzoPayButton
+                        product={{
+                          id: product.id,
+                          name: product.name,
+                          price_minor: product.price_minor,
+                          sku: product.sku,
+                          currency: product.currency,
+                        }}
+                        variant="pill"
+                      />
                       <AddToCartButton
                         product={{
                           id: product.id,
@@ -348,7 +359,7 @@ export default async function Shop({ searchParams }: { searchParams: SearchParam
                       />
                       <Link
                         href={`/products/${product.slug}`}
-                        className="rounded-full border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700"
+                        className="rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700"
                       >
                         Specs ↗
                       </Link>

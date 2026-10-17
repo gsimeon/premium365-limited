@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ShieldCheck, Truck, RotateCcw, ArrowLeft, Cpu } from "lucide-react";
 import { formatPrice, getActiveProductBySlug } from "@/lib/catalogue";
 import { AddToCartButton } from "@/components/cart/add-to-cart-button";
+import { MonzoPayButton } from "@/components/monzo/monzo-pay-button";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -153,7 +154,7 @@ export default async function ProductDetail({ params }: Props) {
                   </span>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-3 pt-2">
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <div className="flex-1">
                     <AddToCartButton
                       product={{
@@ -166,17 +167,34 @@ export default async function ProductDetail({ params }: Props) {
                     />
                   </div>
 
-                  <Link
-                    href={`/contact?product=${encodeURIComponent(product.name)}`}
-                    className="rounded-full border border-slate-300 bg-slate-50 px-6 py-3 text-xs font-bold text-slate-800 transition-colors hover:border-slate-400 hover:bg-slate-100"
-                  >
-                    Request Business Quote
-                  </Link>
+                  <MonzoPayButton
+                    product={{
+                      id: product.id,
+                      name: product.name,
+                      price_minor: product.price_minor,
+                      sku: product.sku,
+                      currency: product.currency,
+                    }}
+                    variant="primary"
+                    className="w-full sm:w-auto"
+                  />
                 </div>
 
-                <div className="border-t border-slate-100 pt-3 flex items-center justify-between text-[11px] text-slate-500">
-                  <span>Safe Checkout: Stripe & PayPal</span>
-                  <span>Free standard delivery on this item</span>
+                <div className="flex items-center justify-between pt-1">
+                  <Link
+                    href={`/contact?product=${encodeURIComponent(product.name)}`}
+                    className="text-xs font-bold text-slate-700 hover:text-blue-600 underline"
+                  >
+                    Request Bespoke Business Quote / B2B PO →
+                  </Link>
+                  <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                    Free UK Courier Dispatch
+                  </span>
+                </div>
+
+                <div className="border-t border-slate-100 pt-3 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500">
+                  <span>Fast Instant Payments: Monzo.me · Apple Pay · Card</span>
+                  <span>12-Month UK Warranty</span>
                 </div>
               </div>
 
