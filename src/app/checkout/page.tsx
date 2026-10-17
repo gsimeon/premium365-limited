@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ShieldCheck, Lock, CreditCard, ArrowRight, Loader2, Truck } from "lucide-react";
+import { ShieldCheck, Lock, CreditCard, ArrowRight, Loader2, Truck, Sparkles } from "lucide-react";
 import { useCart } from "@/components/cart/cart-provider";
 import { formatPrice } from "@/lib/format";
+import { AddressPostcodeLookup } from "@/components/checkout/address-postcode-lookup";
 
 export default function CheckoutPage() {
-  const { items } = useCart();
+  const { items, add } = useCart();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [address1, setAddress1] = useState("");
@@ -60,15 +61,76 @@ export default function CheckoutPage() {
 
   if (!items.length) {
     return (
-      <section className="mx-auto max-w-3xl px-5 py-24 text-center">
-        <h1 className="font-display text-4xl font-extrabold text-slate-900">Checkout</h1>
-        <p className="mt-3 text-slate-600">Your shopping cart is currently empty.</p>
-        <Link
-          href="/shop"
-          className="mt-6 inline-flex rounded-full bg-blue-600 px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-blue-700 shadow-md transition-all"
-        >
-          Browse Hardware Catalogue
-        </Link>
+      <section className="mx-auto max-w-4xl px-5 py-16 sm:py-24 text-center">
+        <div className="rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-sm space-y-6">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600">
+            Checkout · Cart Empty
+          </span>
+          <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900">
+            Shopping Cart is Empty
+          </h1>
+          <p className="max-w-md mx-auto text-sm text-slate-600 leading-relaxed">
+            To complete a purchase and enter your delivery address, add an item to your cart from the hardware catalogue, or click below to populate a sample item for testing.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <button
+              type="button"
+              onClick={() =>
+                add({
+                  productId: "c1a10001-0000-0000-0000-000000000001",
+                  slug: "thinkpad-t14-gen-4",
+                  name: "ThinkPad T14 Gen 4 Core i7 32GB 1TB SSD",
+                  priceMinor: 89900,
+                  currency: "GBP",
+                })
+              }
+              className="inline-flex rounded-full bg-blue-600 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white hover:bg-blue-700 shadow-md transition-all cursor-pointer"
+            >
+              Add Demo Item & Open Full Checkout →
+            </button>
+            <Link
+              href="/shop"
+              className="inline-flex rounded-full border border-slate-300 bg-white px-6 py-3 text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-50 transition-all"
+            >
+              Browse Hardware Catalogue
+            </Link>
+          </div>
+
+          {/* Interactive Live Preview of Address & House Popup */}
+          <div className="mt-8 border-t border-slate-100 pt-8 text-left max-w-xl mx-auto space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
+                  <Sparkles className="h-4 w-4 text-blue-600" />
+                  Try Delivery Address & House Popup Here:
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Type your UK postcode (e.g. <span className="font-mono font-bold text-blue-600">B16 0LR</span> or <span className="font-mono font-bold text-blue-600">SW1A 2AA</span>) to test the house selector popup.
+                </p>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-slate-50 p-4 border border-slate-200">
+              <AddressPostcodeLookup
+                postcode={postcode}
+                onPostcodeChange={(pc) => setPostcode(pc)}
+                onSelectAddress={({ line1, city: c, postcode: pc }) => {
+                  setAddress1(line1);
+                  setCity(c);
+                  setPostcode(pc);
+                }}
+              />
+            </div>
+
+            {address1 && (
+              <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-3 text-xs text-emerald-800">
+                <p className="font-bold">Address Selected Successfully:</p>
+                <p className="mt-0.5">{address1}, {city}, {postcode}</p>
+              </div>
+            )}
+          </div>
+        </div>
       </section>
     );
   }
@@ -116,12 +178,18 @@ export default function CheckoutPage() {
 
           {/* Step 2: Shipping Destination */}
           <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 space-y-4 shadow-xs">
-            <h2 className="font-display text-lg font-bold text-slate-900 flex items-center gap-2">
-              <span className="grid h-6 w-6 place-items-center rounded-full bg-blue-600 text-xs font-bold text-white">
-                2
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 border-b border-slate-100 pb-3">
+              <h2 className="font-display text-lg font-bold text-slate-900 flex items-center gap-2">
+                <span className="grid h-6 w-6 place-items-center rounded-full bg-blue-600 text-xs font-bold text-white">
+                  2
+                </span>
+                <span>Delivery Address</span>
+              </h2>
+              <span className="text-[11px] font-medium text-slate-500 flex items-center gap-1">
+                <Sparkles className="h-3.5 w-3.5 text-blue-600" />
+                Auto-find house & street by postcode
               </span>
-              <span>Delivery Address</span>
-            </h2>
+            </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 sm:col-span-2">
@@ -137,6 +205,32 @@ export default function CheckoutPage() {
                 />
               </label>
 
+              {/* UK Postcode Finder with House Lookup Popup */}
+              <div className="sm:col-span-2 rounded-2xl bg-slate-50/80 p-4 border border-slate-200/80 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                    <Truck className="h-4 w-4 text-blue-600" />
+                    Fast Address Autocomplete
+                  </span>
+                  <span className="text-[11px] text-slate-500">
+                    UK Royal Mail & ONS database
+                  </span>
+                </div>
+                <AddressPostcodeLookup
+                  postcode={postcode}
+                  onPostcodeChange={(newPc) => setPostcode(newPc)}
+                  onSelectAddress={({ line1, city: newCity, postcode: newPc }) => {
+                    setAddress1(line1);
+                    setCity(newCity);
+                    setPostcode(newPc);
+                  }}
+                  onManualEntryClick={() => {
+                    const el = document.getElementById("checkout-address");
+                    el?.focus();
+                  }}
+                />
+              </div>
+
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 sm:col-span-2">
                 Street Address <span className="text-blue-600">*</span>
                 <input
@@ -145,7 +239,7 @@ export default function CheckoutPage() {
                   value={address1}
                   onChange={(e) => setAddress1(e.target.value)}
                   autoComplete="address-line1"
-                  placeholder="Suite 4, Innovation House"
+                  placeholder="e.g. 14 Hallewell Road or Suite 4, Innovation House"
                   className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all shadow-2xs"
                 />
               </label>
@@ -158,25 +252,12 @@ export default function CheckoutPage() {
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   autoComplete="address-level2"
-                  placeholder="Birmingham"
+                  placeholder="e.g. Birmingham"
                   className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all shadow-2xs"
                 />
               </label>
 
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                UK Postcode <span className="text-blue-600">*</span>
-                <input
-                  id="checkout-postcode"
-                  required
-                  value={postcode}
-                  onChange={(e) => setPostcode(e.target.value)}
-                  autoComplete="postal-code"
-                  placeholder="B16 0LR"
-                  className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all shadow-2xs"
-                />
-              </label>
-
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 sm:col-span-2">
                 Country
                 <select
                   id="checkout-country"
